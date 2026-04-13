@@ -10,7 +10,7 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Get Lilu SHA
       id: get-lilu-sha
@@ -19,7 +19,7 @@ jobs:
 
     - name: Cache Lilu
       id: cache-lilu
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: Lilu.kext
         key: Lilu-${{ steps.get-lilu-sha.outputs.hash }}
@@ -49,7 +49,7 @@ jobs:
         xcodebuild -alltargets -configuration Release | xcpretty && exit ${PIPESTATUS[0]}
 
     - name: Upload to Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: ${{ github.event.repository.name }}
         path: build/*/*.zip
